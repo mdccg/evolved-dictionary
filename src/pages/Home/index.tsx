@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
+import { ClimbingBoxLoader } from 'react-spinners';
 import WordCard from '../../components/WordCard';
 import { isInstanceOfWordNotFound, Word } from '../../models/Word';
 import { WordService } from '../../services/WordService';
 import { HomeContainer, NoResultsFoundMessage, ResultsFoundMessage, SearchButton, SearchInput, SearchPanel } from './styles';
+import { LoaderSizeProps } from 'react-spinners/helpers/props';
 
 const Home = () => {
   const [filter, setFilter] = useState<string>('');
@@ -10,6 +12,12 @@ const Home = () => {
   const [noWordFound, setNoWordFound] = useState<boolean>(false);
   const [words, setWords] = useState<Word[]>([]);
   const [wordService] = useState<WordService>(new WordService());
+  const [loaderSizeProps] = useState<LoaderSizeProps>({
+    color: 'var(--roxinho)',
+    cssOverride: {
+      margin: '10px auto'
+    }
+  });
   const searchWords = useCallback(async () => {
     if (filter) {
       setIsSearching(true);
@@ -20,7 +28,7 @@ const Home = () => {
       isInstanceOfWordNotFound(response) ? setNoWordFound(true) : setWords(response as Word[]);
       setIsSearching(false);
     }
-  }, [isSearching, filter]);
+  }, [filter, wordService]);
 
   return (
     <HomeContainer>
@@ -28,7 +36,10 @@ const Home = () => {
         <SearchInput
           data-cy="search-input"
           value={filter}
-          onChange={(event) => setFilter(event.target.value)}
+          onChange={(event) => {
+            setFilter(event.target.value);
+          }}
+          onKeyUp={(event) => event.key === 'Enter' ? searchWords() : undefined}
           placeholder="Apple, orange, book&hellip;" />
         
         <SearchButton
@@ -36,28 +47,30 @@ const Home = () => {
           value="Buscar"
           disabled={isSearching}
           onClick={searchWords} />
-
-        {!isSearching && words.length > 0 && (
-          <>
-            <ResultsFoundMessage>
-              {words.length} resultado(s) encontrados
-            </ResultsFoundMessage>
-
-            {words.map((word, index) => (
-              <WordCard
-                key={index}
-                order={index + 1}
-                word={word} />
-            ))}
-          </>
-        )}
-
-        {!isSearching && noWordFound && (
-          <NoResultsFoundMessage>
-            Nenhum resultado foi encontrado
-          </NoResultsFoundMessage>
-        )}
       </SearchPanel>
+
+      {isSearching && <ClimbingBoxLoader {...loaderSizeProps} />}
+
+      {!isSearching && words.length > 0 && (
+        <>
+          <ResultsFoundMessage>
+            {words.length} resultado(s) encontrados
+          </ResultsFoundMessage>
+
+          {words.map((word, index) => (
+            <WordCard
+              key={index}
+              order={index + 1}
+              word={word} />
+          ))}
+        </>
+      )}
+
+      {!isSearching && noWordFound && (
+        <NoResultsFoundMessage>
+          Nenhum resultado foi encontrado
+        </NoResultsFoundMessage>
+      )}
     </HomeContainer>
   );
 }

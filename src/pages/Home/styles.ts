@@ -25,7 +25,7 @@ export const SearchInput = styled.input.attrs({ type: 'text' })`
 `;
 
 export const SearchButton = styled.input.attrs({ type: 'button' })`
-  background-color: #392e4a;
+  background-color: var(--roxinho);
   color: white;
   font-family: 'bold';
   padding: 10px 20px;

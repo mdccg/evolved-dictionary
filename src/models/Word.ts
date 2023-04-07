@@ -41,7 +41,7 @@ export const getWords = (jsonObj: any): Word[] | WordNotFound => {
         if (definitions && definitions.length > 0) {
           definitions.forEach((d: any) => {
             const { definition } = d
-            meaningsArr.push(d)
+            meaningsArr.push(definition)
           })
         }
       })
