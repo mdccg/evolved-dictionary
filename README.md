@@ -72,7 +72,19 @@ Caso esteja utilizando o gerenciador de pacotes Yarn, execute o seguinte comando
 $ yarn
 ```
 
-4. A próxima etapa é disponibilizar o seguinte projeto em um servidor HTTP estático. Como sugestão, você pode usar o módulo do npm [`http-server`](https://npmjs.com/package/http-server), que pode ser instalado globalmente via npm ou Yarn e subirá um servidor na porta `8080` visível para toda a sua rede. Sinta-se à vontade para utilizar uma ferramenta de sua preferência, mas não se esqueça de atualizar a propriedade `baseUrl` no arquivo [`cypress.config.ts`](./cypress.config.ts);
+4. Execute o seguinte comando para iniciar o app:
+
+Para npm:
+
+```console
+$ npm run start
+```
+
+Para Yarn:
+
+```console
+$ yarn start
+```
 
 5. Execute o Cypress através do seguinte comando:
 
