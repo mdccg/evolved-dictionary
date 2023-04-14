@@ -40,7 +40,7 @@ const Details = () => {
         </DetailsPanel>
       )}
 
-      <BackButton onClick={() => navigate('/')}>Voltar</BackButton>
+      <BackButton data-cy="back-button" onClick={() => navigate('/')}>Voltar</BackButton>
     </DetailsContainer>
   );
 }

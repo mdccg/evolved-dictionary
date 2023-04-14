@@ -1,10 +1,15 @@
 import { useRoutes } from 'react-router-dom'
 import routes from './routes'
+import { UserContextProvider } from './context/UserContext';
 
 const App = () => {
   const elements = useRoutes(routes)
 
-  return <>{elements}</>
+  return (
+    <UserContextProvider>
+      {elements}
+    </UserContextProvider>
+  );
 }
 
 export default App
