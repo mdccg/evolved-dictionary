@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Word } from './../../models/Word';
-import { AudioPlayer, DetailsContainer, DetailsList, DetailsMetadata, DetailsPanel, DetailsPanelTitle, DetailsTitle } from './styles';
+import { AudioPlayer, BackButton, DetailsContainer, DetailsList, DetailsMetadata, DetailsPanel, DetailsPanelTitle, DetailsTitle } from './styles';
 
 type Location = {
   state: {
@@ -39,6 +39,8 @@ const Details = () => {
           ))}
         </DetailsPanel>
       )}
+
+      <BackButton onClick={() => navigate('/')}>Voltar</BackButton>
     </DetailsContainer>
   );
 }

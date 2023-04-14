@@ -1,16 +1,17 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useContext } from 'react';
 import { ClimbingBoxLoader } from 'react-spinners';
 import WordCard from '../../components/WordCard';
 import { isInstanceOfWordNotFound, Word } from '../../models/Word';
 import { WordService } from '../../services/WordService';
 import { HomeContainer, NoResultsFoundMessage, ResultsFoundMessage, SearchButton, SearchInput, SearchPanel } from './styles';
 import { LoaderSizeProps } from 'react-spinners/helpers/props';
+import UserContext from '../../context/UserContext';
+import { setWords } from '../../context/Actions';
 
 const Home = () => {
   const [filter, setFilter] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [noWordFound, setNoWordFound] = useState<boolean>(false);
-  const [words, setWords] = useState<Word[]>([]);
   const [wordService] = useState<WordService>(new WordService());
   const [loaderSizeProps] = useState<LoaderSizeProps>({
     color: 'var(--roxinho)',
@@ -18,14 +19,16 @@ const Home = () => {
       margin: '10px auto'
     }
   });
+  const { state, dispatch } = useContext(UserContext);
+  const { words } = state;
   const searchWords = useCallback(async () => {
     if (filter) {
       setIsSearching(true);
       setNoWordFound(false);
-      setWords([]);
+      setWords(dispatch, []);
 
       const response = await wordService.findWords(filter);
-      isInstanceOfWordNotFound(response) ? setNoWordFound(true) : setWords(response as Word[]);
+      isInstanceOfWordNotFound(response) ? setNoWordFound(true) : setWords(dispatch, response as Word[]);
       setIsSearching(false);
     }
   }, [filter, wordService]);
