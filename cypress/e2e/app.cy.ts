@@ -8,9 +8,7 @@ describe('English Dictionary E2E tests', () => {
     const query = 'word';
     
     cy.intercept('GET', `${Cypress.env('API_URL')}/${query}`, { body: this.apiResponse });
-    
-    cy.get('[data-cy="search-input"]').type(query);
-    cy.get('[data-cy="search-button"]').click();
+    cy.performSearch(query);
     cy.get('[data-cy="word-card"]').should('have.length', this.apiResponse.length);
   });
 });
