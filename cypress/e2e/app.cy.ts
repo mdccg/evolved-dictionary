@@ -83,9 +83,25 @@ describe('English Dictionary E2E tests', () => {
 
     cy.request(requestOptions).then(({ status, body }) => {
       const words: Word[] | WordNotFound = getWords(body);
-      cy.performSearch(query);
       console.log(words);
+      
+      cy.performSearch(query);
       cy.get('[data-cy="word-details"]').first().click();
+      
+      const firstWord: Word = words[0];
+      const meaningsList = cy.get('[data-cy="details-list"] > li');
+
+      meaningsList.should('have.length', firstWord.meanings.length);
+
+      meaningsList.then(($value: JQuery<HTMLElement>) => {
+        const { meanings } = firstWord;
+        
+        for (let i = 0; i < meanings.length; ++i) {
+          expect($value[i].innerText).to.equal(meanings.at(i));
+        }
+
+        // cy.get('[data-cy="details-list"] > :nth-child(1)')
+      });
     });
   });
 });
