@@ -21,7 +21,7 @@ Entretanto, este dicionário também tem a opção de reproduzir as pronúncias 
 
 Este foi o quarto repositório de código apresentado no [Curso Superior de TSI do IFMS](https://www.ifms.edu.br/campi/campus-aquidauana/cursos/graduacao/sistemas-para-internet/sistemas-para-internet) como requisito para obtenção da nota parcial das atividades da unidade curricular Construção de Páginas Web IV.
 
-| [&larr; Repositório anterior](https://github.com/mdccg/color-panel/) | [Próximo repositório &rarr;](#) |
+| [&larr; Repositório anterior](https://github.com/mdccg/color-panel/) | [Próximo repositório &rarr;](https://github.com/mdccg/anime-snap/) |
 |-|-|
 
 ## Pilha de tecnologia
@@ -51,8 +51,7 @@ As seguintes tecnologias foram utilizadas para desenvolver este app:
 ### Pré-requisitos
 
 - [Node](https://nodejs.org/en/download/);
-- [Yarn](https://yarnpkg.com/) (opcional);
-- [`http-server`](https://npmjs.com/package/http-server) ou quaisquer ferramentas de servidores HTTP estáticos.
+- [Yarn](https://yarnpkg.com/) (opcional).
 
 ### Passo a passo
 
